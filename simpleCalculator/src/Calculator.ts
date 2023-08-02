@@ -1,8 +1,8 @@
-import { Operator } from "./Operator";
-import { AdditionOperation } from "./Operations/AdditionOperation";
-import { SubtractionOperation } from "./Operations/SubtractionOperation";
-import { MultiplicationOperation } from "./Operations/MultiplicationOperation";
-import { DivisionOperation } from "./Operations/DivisionOperation";
+import { Operator } from "./types/Operator";
+import { AdditionOperation } from "./operations/AdditionOperation";
+import { SubtractionOperation } from "./operations/SubtractionOperation";
+import { MultiplicationOperation } from "./operations/MultiplicationOperation";
+import { DivisionOperation } from "./operations/DivisionOperation";
 
 export class Calculator {
   execute({firstNumber, secondNumber, operator}: Calculator.Params): number {

@@ -1,5 +1,5 @@
 import { Calculator } from "../src/Calculator"
-import { Operator } from "../src/Operator";
+import { Operator } from "../src/types/Operator";
 
 type Operation = [number, number, Operator, number];
 
