@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "run:calculator": "npx ts-node simpleCalculator/src/api/main.ts",
+    "run:calculator": "npx ts-node challenges/simpleCalculator/src/api/main.ts",
+    "run:primeNumbers": "npx ts-node challenges/primeNumbers/main.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
