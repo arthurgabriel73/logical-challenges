@@ -1,5 +1,5 @@
 import { Operator } from "./Operator";
-import { SumOperation } from "./SumOperation";
+import { AdditionOperation } from "./AdditionOperation";
 
 export class Calculator {
   execute({firstNumber, secondNumber, operator}: Calculator.Params): number {
@@ -8,7 +8,7 @@ export class Calculator {
 
   getOperation(operator: Operator) {
     const strategies = {
-      '+': SumOperation
+      '+': AdditionOperation
     };
     
     return new strategies[operator]();
