@@ -1,5 +1,8 @@
-import { Operator } from "./Operator";
-import { AdditionOperation } from "./AdditionOperation";
+import { Operator } from "./types/Operator";
+import { AdditionOperation } from "./operations/AdditionOperation";
+import { SubtractionOperation } from "./operations/SubtractionOperation";
+import { MultiplicationOperation } from "./operations/MultiplicationOperation";
+import { DivisionOperation } from "./operations/DivisionOperation";
 
 export class Calculator {
   execute({firstNumber, secondNumber, operator}: Calculator.Params): number {
@@ -8,7 +11,10 @@ export class Calculator {
 
   getOperation(operator: Operator) {
     const strategies = {
-      '+': AdditionOperation
+      '+': AdditionOperation,
+      '-': SubtractionOperation,
+      '*': MultiplicationOperation,
+      '/': DivisionOperation
     };
     
     return new strategies[operator]();
