@@ -1,10 +1,12 @@
-export class GradeCalculator {
-  execute(subjects: GradeCalculator.Params): string {
+import { GradeSumResult, IGradeCalculator, SingleGrade } from "./protocols/IGradeCalculator";
+
+export class GradeCalculator implements IGradeCalculator {
+  execute(subjects: SingleGrade[]): string {
     const { gradeSum, subjectsCount } = this.getGradeSum(subjects);
     return this.getAvarage(gradeSum, subjectsCount);
   }
 
-  getGradeSum(subjects: GradeCalculator.Params): GradeCalculator.GradeSumResult {
+  getGradeSum(subjects: SingleGrade[]): GradeSumResult {
     let gradeSum = 0;
     let subjectsCount = 0;
     for (const subject of subjects) {
@@ -21,16 +23,3 @@ export class GradeCalculator {
   }
 }
 
-export namespace GradeCalculator {
-  export type Params = {
-    subject: string; 
-    grade: number;
-  }[]
-
-  export type SingleGrade = {
-  subject: string;
-  grade: number;
-};
-
-  export type GradeSumResult = { gradeSum: number; subjectsCount: number; };
-}
