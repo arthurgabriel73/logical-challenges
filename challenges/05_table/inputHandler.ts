@@ -13,7 +13,7 @@ export function handleInput(): void {
       executeInput(userInput);
     } catch (e) {
       if (e instanceof InvalidNumberError) {
-        console.log('Error:', e.message);
+        console.log('Error: ', e.message);
       }
     }
 
