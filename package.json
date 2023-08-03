@@ -9,6 +9,7 @@
     "run:factorial": "npx ts-node challenges/03_factorial/main.ts",
     "run:palindrome": "npx ts-node challenges/04_palindrome/main.ts",
     "run:table": "npx ts-node challenges/05_table/main.ts",
+    "run:vowels": "npx ts-node challenges/06_vowelCounter/main.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
