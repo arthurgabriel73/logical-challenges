@@ -1,6 +1,7 @@
 export interface IInterestCalculator {
   calculateSimpleInterest(data: SimpleInterestData): number;
   calculateCompoundInterest(data: CompoundInterestData): number;
+  toCurrencyString(compoundInterest: number): string;
 }
 
 export type SimpleInterestData = {

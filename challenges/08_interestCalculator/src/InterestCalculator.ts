@@ -47,7 +47,7 @@ export class InterestCalculator implements IInterestCalculator {
     return Math.round(value * 100) / 100;
   }
 
-  toCurrencyString(value: number): string {
+  public toCurrencyString(value: number): string {
     return value.toLocaleString("en-US", {
       style: "currency",
       currency: "USD",

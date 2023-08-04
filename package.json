@@ -11,6 +11,7 @@
     "run:table": "npx ts-node challenges/05_table/main.ts",
     "run:vowels": "npx ts-node challenges/06_vowelCounter/main.ts",
     "run:grades": "npx ts-node challenges/07_gradeAvarage/src/main.ts",
+    "run:investment": "npx ts-node challenges/08_interestCalculator/src/main.ts",
     "test": "jest",
     "test:watch": "jest --watch"
   },
