@@ -54,7 +54,7 @@ private async validateCalculationType(input: string): Promise<CalculationType> {
 
 private async validateNumberInput(input: string): Promise<number> {
   while (true) {
-    const value = parseFloat(input);
+    const value = parseFloat(input.replace(',', '.'));
 
     if (isNaN(value) || value <= 0) {
       console.log("Invalid input. Please enter a valid positive number.");
