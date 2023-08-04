@@ -11,15 +11,30 @@ export class Processor {
     const inputData: InputDataType = await this.inputHandler.getInput();
 
     if (inputData.calculationType === "simple") {
-      const simpleInterest = this.interestCalculator.calculateSimpleInterest({
+      const simpleInterest = this.getSimpleValue(inputData);
+      console.log("Simple Interest:", this.interestCalculator.toCurrencyString(simpleInterest));
+
+    } else if (inputData.calculationType === "compound") {
+      const compoundInterest = this.getCompoundValue(inputData);
+      console.log("Compound Interest:", this.interestCalculator.toCurrencyString(compoundInterest));
+
+    } else {
+      console.log("Invalid calculation type chosen.");
+    }
+
+    this.inputHandler.close();
+  }
+  
+  getSimpleValue(inputData: InputDataType): number {
+    return this.interestCalculator.calculateSimpleInterest({
         initialCapital: inputData.initialCapital,
         monthlyInterestRate: inputData.monthlyInterestRate,
         investmentTimeInMonths: inputData.investmentTimeInMonths,
       });
+  }
 
-      console.log("Simple Interest:", this.interestCalculator.toCurrencyString(simpleInterest));
-    } else if (inputData.calculationType === "compound") {
-      const compoundInterest = this.interestCalculator.calculateCompoundInterest({
+  getCompoundValue(inputData: InputDataType): number {
+    return this.interestCalculator.calculateCompoundInterest({
         minimumData: {
           initialCapital: inputData.initialCapital,
           monthlyInterestRate: inputData.monthlyInterestRate,
@@ -27,12 +42,6 @@ export class Processor {
         },
         monthlyContributions: inputData.monthlyContributions,
       });
-
-      console.log("Compound Interest:", this.interestCalculator.toCurrencyString(compoundInterest));
-    } else {
-      console.log("Invalid calculation type chosen.");
-    }
-
-    this.inputHandler.close();
   }
+
 }
