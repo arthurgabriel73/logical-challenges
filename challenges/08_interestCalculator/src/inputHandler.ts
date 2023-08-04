@@ -1,5 +1,6 @@
 import readline from "readline";
 import { IInputHandler, InputDataType } from "./protocols/IInputHandler";
+import { CalculationType } from "./enum/CalculationType";
 
 export class InputHandler implements IInputHandler {
   private readonly readline: readline.Interface;
@@ -20,26 +21,50 @@ export class InputHandler implements IInputHandler {
   }
 
   async getInput(): Promise<InputDataType> {
-    const calculationTypeStr = await this.promptUser("Choose calculation type (simple/compound): ");
-    const initialCapitalStr = await this.promptUser("Enter initial capital: ");
-    const monthlyInterestRateStr = await this.promptUser("Enter interest rate per month (%): ");
-    const investmentTimeInMonthsStr = await this.promptUser("Enter investment time in months: ");
-    const monthlyContributionsStr = await this.promptUser("Enter monthly contributions (optional, press Enter to skip): ");
+  const calculationTypeStr = await this.validateCalculationType(await this.promptUser("Choose calculation type (simple/compound): "));
+  const initialCapital = await this.validateNumberInput(await this.promptUser("Enter initial capital: "));
+  const monthlyInterestRate = await this.validateNumberInput(await this.promptUser("Enter interest rate per month (%): "));
+  const investmentTimeInMonths = await this.validateNumberInput(await this.promptUser("Enter investment time in months: "));
+  const monthlyContributionsStr = await this.promptUser("Enter monthly contributions (Optional, only for compound calculation type, press Enter to skip): ");
 
-    const calculationType = calculationTypeStr.toLowerCase() as "simple" | "compound";
-    const initialCapital = parseFloat(initialCapitalStr);
-    const monthlyInterestRate = parseFloat(monthlyInterestRateStr);
-    const investmentTimeInMonths = parseInt(investmentTimeInMonthsStr);
-    const monthlyContributions = monthlyContributionsStr ? parseFloat(monthlyContributionsStr) : undefined;
+  const calculationType = calculationTypeStr;
+  const monthlyContributions = monthlyContributionsStr ? parseFloat(monthlyContributionsStr) : undefined;
 
-    return {
-      calculationType,
-      initialCapital,
-      monthlyInterestRate,
-      investmentTimeInMonths,
-      monthlyContributions,
-    };
+  return {
+    calculationType,
+    initialCapital,
+    monthlyInterestRate,
+    investmentTimeInMonths,
+    monthlyContributions,
+  };
+}
+
+private async validateCalculationType(input: string): Promise<CalculationType> {
+  while (true) {
+    const selectedType = input.toLowerCase();
+
+    if (selectedType === CalculationType.SIMPLE || selectedType === CalculationType.COMPOUND) {
+      return selectedType;
+    } else {
+      console.log("Invalid calculation type. Please choose 'simple' or 'compound'.");
+      input = await this.promptUser("Choose calculation type (simple/compound): ");
+    }
   }
+}
+
+private async validateNumberInput(input: string): Promise<number> {
+  while (true) {
+    const value = parseFloat(input);
+
+    if (isNaN(value) || value <= 0) {
+      console.log("Invalid input. Please enter a valid positive number.");
+      input = await this.promptUser(`Enter a valid number: `);
+    } else {
+      return value;
+    }
+  }
+}
+
 
   close() {
     this.readline.close();
