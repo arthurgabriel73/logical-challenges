@@ -1,15 +1,15 @@
 export interface IInterestCalculator {
-  calculateSimpleInterest(): string;
-  calculateCompoundInterest(): string;
+  calculateSimpleInterest(data: SimpleInterestData): number;
+  calculateCompoundInterest(data: CompoundInterestData): number;
 }
 
 export type SimpleInterestData = {
   initialCapital: number;
-  interestRate: number;
-  investmentTime: number;
+  monthlyInterestRate: number;
+  investmentTimeInMonths: number;
 }
 
 export type CompoundInterestData = {
-  data: SimpleInterestData;
+  minimumData: SimpleInterestData;
   monthlyContributions?: number;
 }
