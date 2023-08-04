@@ -37,7 +37,9 @@ export class InterestCalculator implements IInterestCalculator {
   }): number {
     const { initialCapital, interestRatePerMonth, investmentTimeInMonths, monthlyContributions } = data;
     const compoundFactor = Math.pow(1 + interestRatePerMonth, investmentTimeInMonths);
-    const compoundValue = (initialCapital * compoundFactor) + ((monthlyContributions * (compoundFactor - 1)) / interestRatePerMonth);
+    const compoundValue = (initialCapital * compoundFactor) 
+                        + ((monthlyContributions * (compoundFactor - 1)) 
+                        / interestRatePerMonth);
     return this.round(compoundValue);
   }
 
