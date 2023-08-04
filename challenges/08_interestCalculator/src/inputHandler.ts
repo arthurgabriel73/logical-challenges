@@ -28,7 +28,7 @@ export class InputHandler implements IInputHandler {
   const monthlyContributionsStr = await this.promptUser("Enter monthly contributions (Optional, only for compound calculation type, press Enter to skip): ");
 
   const calculationType = calculationTypeStr;
-  const monthlyContributions = monthlyContributionsStr ? parseFloat(monthlyContributionsStr) : undefined;
+  const monthlyContributions = monthlyContributionsStr ? parseFloat(monthlyContributionsStr.replace(',', '.')) : undefined;
 
   return {
     calculationType,
@@ -54,7 +54,7 @@ private async validateCalculationType(input: string): Promise<CalculationType> {
 
 private async validateNumberInput(input: string): Promise<number> {
   while (true) {
-    const value = parseFloat(input.replace(',', '.'));
+    let value = parseFloat(input.replace(',', '.'));
 
     if (isNaN(value) || value <= 0) {
       console.log("Invalid input. Please enter a valid positive number.");
